@@ -1,0 +1,1732 @@
+{
+  "pipelines": [
+    {
+      "id": "pipe-hn-api",
+      "name": "HackerNews Top Stories (Tech Web App)",
+      "description": "Thu thập danh sách tin tức công nghệ, bài thảo luận kỹ thuật hàng đầu từ HackerNews API",
+      "type": "rest_api",
+      "targetUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "method": "GET",
+      "headers": {
+        "Accept": "application/json"
+      },
+      "schedule": "15m",
+      "status": "active",
+      "dataPath": "",
+      "fields": [
+        {
+          "id": "f1",
+          "name": "storyId",
+          "jsonPath": "",
+          "type": "number"
+        },
+        {
+          "id": "f2",
+          "name": "title",
+          "jsonPath": "title",
+          "type": "string"
+        },
+        {
+          "id": "f3",
+          "name": "by",
+          "jsonPath": "by",
+          "type": "string"
+        },
+        {
+          "id": "f4",
+          "name": "score",
+          "jsonPath": "score",
+          "type": "number"
+        },
+        {
+          "id": "f5",
+          "name": "url",
+          "jsonPath": "url",
+          "type": "string"
+        }
+      ],
+      "totalCollected": 24,
+      "createdAt": "2026-10-13T01:31:21.671Z",
+      "updatedAt": "2026-10-13T02:02:33.297Z",
+      "lastRunAt": "2026-10-13T02:02:33.297Z",
+      "lastRunStatus": "success",
+      "lastRunDurationMs": 778
+    },
+    {
+      "id": "pipe-crypto-rates",
+      "name": "CoinGecko Crypto Market Rates (Finance App)",
+      "description": "Thu thập bảng giá tiền điện tử thời gian thực: BTC, ETH, SOL, BNB, XRP kèm biến động 24h",
+      "type": "rest_api",
+      "targetUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "method": "GET",
+      "headers": {
+        "Accept": "application/json"
+      },
+      "schedule": "5m",
+      "status": "active",
+      "dataPath": "",
+      "fields": [
+        {
+          "id": "c1",
+          "name": "coin",
+          "jsonPath": "key",
+          "type": "string"
+        },
+        {
+          "id": "c2",
+          "name": "usd_price",
+          "jsonPath": "usd",
+          "type": "number"
+        },
+        {
+          "id": "c3",
+          "name": "change_24h",
+          "jsonPath": "usd_24h_change",
+          "type": "number"
+        },
+        {
+          "id": "c4",
+          "name": "market_cap",
+          "jsonPath": "usd_market_cap",
+          "type": "number"
+        }
+      ],
+      "totalCollected": 35,
+      "createdAt": "2026-10-13T01:31:21.671Z",
+      "updatedAt": "2026-10-13T02:04:02.779Z",
+      "lastRunAt": "2026-10-13T02:04:02.779Z",
+      "lastRunStatus": "success",
+      "lastRunDurationMs": 258
+    },
+    {
+      "id": "pipe-weather-api",
+      "name": "Open-Meteo Global Weather (Meteorology Web App)",
+      "description": "Thu thập chỉ số thời tiết, nhiệt độ, tốc độ gió, độ ẩm khí tượng theo tọa độ địa lý",
+      "type": "rest_api",
+      "targetUrl": "https://api.open-meteo.com/v1/forecast?latitude=21.0285&longitude=105.8542&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,wind_speed_10m",
+      "method": "GET",
+      "headers": {
+        "Accept": "application/json"
+      },
+      "schedule": "1h",
+      "status": "active",
+      "dataPath": "current",
+      "fields": [
+        {
+          "id": "w1",
+          "name": "time",
+          "jsonPath": "time",
+          "type": "string"
+        },
+        {
+          "id": "w2",
+          "name": "temperature_c",
+          "jsonPath": "temperature_2m",
+          "type": "number"
+        },
+        {
+          "id": "w3",
+          "name": "humidity_pct",
+          "jsonPath": "relative_humidity_2m",
+          "type": "number"
+        },
+        {
+          "id": "w4",
+          "name": "wind_speed",
+          "jsonPath": "wind_speed_10m",
+          "type": "number"
+        }
+      ],
+      "totalCollected": 1,
+      "createdAt": "2026-10-13T01:31:21.671Z",
+      "updatedAt": "2026-10-13T01:31:52.810Z",
+      "lastRunAt": "2026-10-13T01:31:52.810Z",
+      "lastRunStatus": "success",
+      "lastRunDurationMs": 1136
+    },
+    {
+      "id": "pipe-rss-tech",
+      "name": "BBC Tech & Global Feed (RSS News Harvester)",
+      "description": "Bộ thu thập RSS Feed tự động đồng bộ tin tức công nghệ quốc tế, tiêu đề, tóm tắt và thời gian phát hành",
+      "type": "rss_feed",
+      "targetUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "schedule": "1h",
+      "status": "active",
+      "fields": [
+        {
+          "id": "r1",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "id": "r2",
+          "name": "link",
+          "type": "string"
+        },
+        {
+          "id": "r3",
+          "name": "pubDate",
+          "type": "string"
+        },
+        {
+          "id": "r4",
+          "name": "description",
+          "type": "string"
+        }
+      ],
+      "totalCollected": 21,
+      "createdAt": "2026-10-13T01:31:21.671Z",
+      "updatedAt": "2026-10-13T01:31:53.474Z",
+      "lastRunAt": "2026-10-13T01:31:53.474Z",
+      "lastRunStatus": "success",
+      "lastRunDurationMs": 664
+    },
+    {
+      "id": "pipe-web-scraper",
+      "name": "VnExpress Tin tức & Sự kiện (HTML Web Scraper)",
+      "description": "Trích xuất bài viết, tiêu đề, liên kết trang chủ báo chí trực tuyến bằng bộ bóc tách DOM selector",
+      "type": "web_scraper",
+      "targetUrl": "https://vnexpress.net/cong-nghe",
+      "containerSelector": "article.item-news",
+      "schedule": "manual",
+      "status": "active",
+      "fields": [
+        {
+          "id": "s1",
+          "name": "title",
+          "selector": "h3.title-news a",
+          "attribute": "text",
+          "type": "string"
+        },
+        {
+          "id": "s2",
+          "name": "link",
+          "selector": "h3.title-news a",
+          "attribute": "href",
+          "type": "string"
+        },
+        {
+          "id": "s3",
+          "name": "summary",
+          "selector": "p.description a",
+          "attribute": "text",
+          "type": "string"
+        }
+      ],
+      "totalCollected": 0,
+      "createdAt": "2026-10-13T01:31:21.671Z",
+      "updatedAt": "2026-10-13T01:31:21.671Z"
+    },
+    {
+      "id": "pipe-webhook-inbound",
+      "name": "External App Webhook Listener (Push Stream)",
+      "description": "Cổng tiếp nhận luồng dữ liệu đẩy từ các ứng dụng web bên ngoài (Stripe, GitHub, CRM, Custom App)",
+      "type": "webhook",
+      "targetUrl": "/api/webhook/pipe-webhook-inbound",
+      "schedule": "manual",
+      "status": "active",
+      "fields": [
+        {
+          "id": "wh1",
+          "name": "event",
+          "jsonPath": "event",
+          "type": "string"
+        },
+        {
+          "id": "wh2",
+          "name": "payload",
+          "jsonPath": "data",
+          "type": "string"
+        }
+      ],
+      "totalCollected": 0,
+      "createdAt": "2026-10-13T01:31:21.671Z",
+      "updatedAt": "2026-10-13T01:31:21.671Z"
+    }
+  ],
+  "records": [
+    {
+      "id": "rec-1791857042779-x1io8",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BITCOIN",
+        "usd_price": 82381,
+        "change_24h_pct": -1.43,
+        "market_cap_usd": 1655318152423.903,
+        "updated_at": "2026-10-13T02:04:02.779Z"
+      },
+      "collectedAt": "2026-10-13T02:04:02.779Z",
+      "checksum": "bitcoin-82381",
+      "synced": true,
+      "syncDestination": "Shopify Data Sync",
+      "syncedAt": "2026-10-13T02:04:43.720Z"
+    },
+    {
+      "id": "rec-1791857042779-rnhd4",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "ETHEREUM",
+        "usd_price": 2462.29,
+        "change_24h_pct": -3.05,
+        "market_cap_usd": 300679657972.8311,
+        "updated_at": "2026-10-13T02:04:02.779Z"
+      },
+      "collectedAt": "2026-10-13T02:04:02.779Z",
+      "checksum": "ethereum-2462.29"
+    },
+    {
+      "id": "rec-1791857042779-cig14",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "SOLANA",
+        "usd_price": 105.24,
+        "change_24h_pct": -5.53,
+        "market_cap_usd": 61998788087.6798,
+        "updated_at": "2026-10-13T02:04:02.779Z"
+      },
+      "collectedAt": "2026-10-13T02:04:02.779Z",
+      "checksum": "solana-105.24"
+    },
+    {
+      "id": "rec-1791857042779-8jazb",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BINANCECOIN",
+        "usd_price": 735.57,
+        "change_24h_pct": -2.11,
+        "market_cap_usd": 97946575977.1976,
+        "updated_at": "2026-10-13T02:04:02.779Z"
+      },
+      "collectedAt": "2026-10-13T02:04:02.779Z",
+      "checksum": "binancecoin-735.57"
+    },
+    {
+      "id": "rec-1791857042779-awm1q",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "RIPPLE",
+        "usd_price": 1.35,
+        "change_24h_pct": -3.5,
+        "market_cap_usd": 85392053808.80164,
+        "updated_at": "2026-10-13T02:04:02.779Z"
+      },
+      "collectedAt": "2026-10-13T02:04:02.779Z",
+      "checksum": "ripple-1.35"
+    },
+    {
+      "id": "rec-1791856953297-o4hrg",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50064318,
+        "title": "GPT-6 Astra Helped Me Jailbreak My Kindle",
+        "by": "nirajrajgor",
+        "score": 112,
+        "comments": 66,
+        "url": "https://nirajrajgor.com/blog/kindle-photo-frame-with-ai",
+        "time": "2026-10-12T23:07:25.000Z"
+      },
+      "collectedAt": "2026-10-13T02:02:33.297Z",
+      "checksum": "50064318"
+    },
+    {
+      "id": "rec-1791856953297-nxdkf",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50058507,
+        "title": "GLM-Legal",
+        "by": "ilreb",
+        "score": 433,
+        "comments": 248,
+        "url": "https://z.ai/blog/glm-legal",
+        "time": "2026-10-12T16:11:45.000Z"
+      },
+      "collectedAt": "2026-10-13T02:02:33.297Z",
+      "checksum": "50058507"
+    },
+    {
+      "id": "rec-1791856953297-qpcfd",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50063138,
+        "title": "Who Is Vfmaddrnd231pd?",
+        "by": "pngmangi",
+        "score": 115,
+        "comments": 10,
+        "url": "https://purplesyringa.moe/blog/who-is-vfmaddrnd231pd/",
+        "time": "2026-10-12T21:12:43.000Z"
+      },
+      "collectedAt": "2026-10-13T02:02:33.297Z",
+      "checksum": "50063138"
+    },
+    {
+      "id": "rec-1791856953297-6zvol",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50058528,
+        "title": "A Modern Web App in C",
+        "by": "prophittcorey",
+        "score": 399,
+        "comments": 161,
+        "url": "https://prophitt.me/writing/a-modern-web-app-in-c",
+        "time": "2026-10-12T16:13:10.000Z"
+      },
+      "collectedAt": "2026-10-13T02:02:33.297Z",
+      "checksum": "50058528"
+    },
+    {
+      "id": "rec-1791856953297-itybs",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50041866,
+        "title": "The baffling intelligence of a single cell (2024)",
+        "by": "jsomers",
+        "score": 41,
+        "comments": 1,
+        "url": "https://jsomers.net/e-coli-chemotaxis/",
+        "time": "2026-10-11T11:02:30.000Z"
+      },
+      "collectedAt": "2026-10-13T02:02:33.297Z",
+      "checksum": "50041866"
+    },
+    {
+      "id": "rec-1791856953297-ofjuo",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50063365,
+        "title": "Intel D270 GPU AI Accelerator–Up to 480 GB LPDDR5X",
+        "by": "hurricanepootis",
+        "score": 68,
+        "comments": 24,
+        "url": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/data-center-gpu/d-series.html",
+        "time": "2026-10-12T21:35:35.000Z"
+      },
+      "collectedAt": "2026-10-13T02:02:33.297Z",
+      "checksum": "50063365"
+    },
+    {
+      "id": "rec-1791856953297-o3fi9",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50055304,
+        "title": "Hackers activate automatic defrosting in supermarket fridges across Europe",
+        "by": "Zeekaas",
+        "score": 452,
+        "comments": 659,
+        "url": "https://www.tomshardware.com/tech-industry/cyber-security/unprecedented-cyberattack-cripples-supermarket-fridges-across-europe-as-hackers-activate-automatic-defrosting-delivery-and-store-prices-also-impacted-by-incident",
+        "time": "2026-10-12T12:16:42.000Z"
+      },
+      "collectedAt": "2026-10-13T02:02:33.297Z",
+      "checksum": "50055304"
+    },
+    {
+      "id": "rec-1791856953297-bd8x2",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50061791,
+        "title": "Making big downloads resumable in Firefox",
+        "by": "speckx",
+        "score": 91,
+        "comments": 33,
+        "url": "https://lunarwatcher.codeberg.page/til/firefox/resumable-big-downloads.html",
+        "time": "2026-10-12T19:36:02.000Z"
+      },
+      "collectedAt": "2026-10-13T02:02:33.297Z",
+      "checksum": "50061791"
+    },
+    {
+      "id": "rec-1791856726349-y8fdo",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BITCOIN",
+        "usd_price": 82353,
+        "change_24h_pct": -1.43,
+        "market_cap_usd": 1655001435410.4536,
+        "updated_at": "2026-10-13T01:58:46.349Z"
+      },
+      "collectedAt": "2026-10-13T01:58:46.349Z",
+      "checksum": "bitcoin-82353"
+    },
+    {
+      "id": "rec-1791856726349-c3m88",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "ETHEREUM",
+        "usd_price": 2460.09,
+        "change_24h_pct": -3.09,
+        "market_cap_usd": 300505916306.30536,
+        "updated_at": "2026-10-13T01:58:46.349Z"
+      },
+      "collectedAt": "2026-10-13T01:58:46.349Z",
+      "checksum": "ethereum-2460.09"
+    },
+    {
+      "id": "rec-1791856726349-ax6ew",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "SOLANA",
+        "usd_price": 105.16,
+        "change_24h_pct": -5.5,
+        "market_cap_usd": 61951832207.02868,
+        "updated_at": "2026-10-13T01:58:46.349Z"
+      },
+      "collectedAt": "2026-10-13T01:58:46.349Z",
+      "checksum": "solana-105.16"
+    },
+    {
+      "id": "rec-1791856726349-2lxti",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BINANCECOIN",
+        "usd_price": 735.3,
+        "change_24h_pct": -2.09,
+        "market_cap_usd": 97911319421.63316,
+        "updated_at": "2026-10-13T01:58:46.349Z"
+      },
+      "collectedAt": "2026-10-13T01:58:46.349Z",
+      "checksum": "binancecoin-735.3"
+    },
+    {
+      "id": "rec-1791856726349-byp7k",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "RIPPLE",
+        "usd_price": 1.35,
+        "change_24h_pct": -3.56,
+        "market_cap_usd": 85366167856.95541,
+        "updated_at": "2026-10-13T01:58:46.349Z"
+      },
+      "collectedAt": "2026-10-13T01:58:46.349Z",
+      "checksum": "ripple-1.35"
+    },
+    {
+      "id": "rec-1791856396304-1jk0e",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BITCOIN",
+        "usd_price": 82275,
+        "change_24h_pct": -1.35,
+        "market_cap_usd": 1653445089926.3804,
+        "updated_at": "2026-10-13T01:53:16.304Z"
+      },
+      "collectedAt": "2026-10-13T01:53:16.304Z",
+      "checksum": "bitcoin-82275"
+    },
+    {
+      "id": "rec-1791856396304-vee1y",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "ETHEREUM",
+        "usd_price": 2458.02,
+        "change_24h_pct": -2.92,
+        "market_cap_usd": 300179888128.81274,
+        "updated_at": "2026-10-13T01:53:16.304Z"
+      },
+      "collectedAt": "2026-10-13T01:53:16.304Z",
+      "checksum": "ethereum-2458.02"
+    },
+    {
+      "id": "rec-1791856396304-3jksn",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "SOLANA",
+        "usd_price": 104.95,
+        "change_24h_pct": -5.38,
+        "market_cap_usd": 61839870763.74624,
+        "updated_at": "2026-10-13T01:53:16.304Z"
+      },
+      "collectedAt": "2026-10-13T01:53:16.304Z",
+      "checksum": "solana-104.95"
+    },
+    {
+      "id": "rec-1791856396304-qhx0v",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BINANCECOIN",
+        "usd_price": 735,
+        "change_24h_pct": -2,
+        "market_cap_usd": 97886694681.1744,
+        "updated_at": "2026-10-13T01:53:16.304Z"
+      },
+      "collectedAt": "2026-10-13T01:53:16.304Z",
+      "checksum": "binancecoin-735"
+    },
+    {
+      "id": "rec-1791856396304-3q67h",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "RIPPLE",
+        "usd_price": 1.35,
+        "change_24h_pct": -3.64,
+        "market_cap_usd": 85156882161.32928,
+        "updated_at": "2026-10-13T01:53:16.304Z"
+      },
+      "collectedAt": "2026-10-13T01:53:16.304Z",
+      "checksum": "ripple-1.35"
+    },
+    {
+      "id": "rec-1791856066286-pmfwu",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BITCOIN",
+        "usd_price": 82289,
+        "change_24h_pct": -1.56,
+        "market_cap_usd": 1653615189285.941,
+        "updated_at": "2026-10-13T01:47:46.286Z"
+      },
+      "collectedAt": "2026-10-13T01:47:46.286Z",
+      "checksum": "bitcoin-82289"
+    },
+    {
+      "id": "rec-1791856066286-44j43",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "ETHEREUM",
+        "usd_price": 2457.36,
+        "change_24h_pct": -3.13,
+        "market_cap_usd": 300112163651.0395,
+        "updated_at": "2026-10-13T01:47:46.286Z"
+      },
+      "collectedAt": "2026-10-13T01:47:46.286Z",
+      "checksum": "ethereum-2457.36"
+    },
+    {
+      "id": "rec-1791856066286-sckeg",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "SOLANA",
+        "usd_price": 104.95,
+        "change_24h_pct": -5.63,
+        "market_cap_usd": 61839147775.217476,
+        "updated_at": "2026-10-13T01:47:46.286Z"
+      },
+      "collectedAt": "2026-10-13T01:47:46.286Z",
+      "checksum": "solana-104.95"
+    },
+    {
+      "id": "rec-1791856066286-ixx11",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BINANCECOIN",
+        "usd_price": 734.83,
+        "change_24h_pct": -2.16,
+        "market_cap_usd": 97850967549.37862,
+        "updated_at": "2026-10-13T01:47:46.286Z"
+      },
+      "collectedAt": "2026-10-13T01:47:46.286Z",
+      "checksum": "binancecoin-734.83"
+    },
+    {
+      "id": "rec-1791856066286-0mn0y",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "RIPPLE",
+        "usd_price": 1.35,
+        "change_24h_pct": -3.88,
+        "market_cap_usd": 85120234415.94301,
+        "updated_at": "2026-10-13T01:47:46.286Z"
+      },
+      "collectedAt": "2026-10-13T01:47:46.286Z",
+      "checksum": "ripple-1.35"
+    },
+    {
+      "id": "rec-1791856036844-s77qs",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50064536,
+        "title": "Blood cells from 80-year-old donor become stem cells with molecular age under 20",
+        "by": "arunc",
+        "score": 89,
+        "comments": 50,
+        "url": "https://doi.org/10.1111/acel.70751",
+        "time": "2026-10-12T23:34:22.000Z"
+      },
+      "collectedAt": "2026-10-13T01:47:16.844Z",
+      "checksum": "50064536"
+    },
+    {
+      "id": "rec-1791856036844-ihafj",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50064318,
+        "title": "GPT-6 Astra Helped Me Jailbreak My Kindle",
+        "by": "nirajrajgor",
+        "score": 100,
+        "comments": 56,
+        "url": "https://nirajrajgor.com/blog/kindle-photo-frame-with-ai",
+        "time": "2026-10-12T23:07:25.000Z"
+      },
+      "collectedAt": "2026-10-13T01:47:16.844Z",
+      "checksum": "50064318"
+    },
+    {
+      "id": "rec-1791856036844-hihrg",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50058507,
+        "title": "GLM-Legal",
+        "by": "ilreb",
+        "score": 430,
+        "comments": 247,
+        "url": "https://z.ai/blog/glm-legal",
+        "time": "2026-10-12T16:11:45.000Z"
+      },
+      "collectedAt": "2026-10-13T01:47:16.844Z",
+      "checksum": "50058507"
+    },
+    {
+      "id": "rec-1791856036844-7u07k",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50063138,
+        "title": "Who Is Vfmaddrnd231pd?",
+        "by": "pngmangi",
+        "score": 112,
+        "comments": 9,
+        "url": "https://purplesyringa.moe/blog/who-is-vfmaddrnd231pd/",
+        "time": "2026-10-12T21:12:43.000Z"
+      },
+      "collectedAt": "2026-10-13T01:47:16.844Z",
+      "checksum": "50063138"
+    },
+    {
+      "id": "rec-1791856036844-1s875",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50058528,
+        "title": "A Modern Web App in C",
+        "by": "prophittcorey",
+        "score": 392,
+        "comments": 161,
+        "url": "https://prophitt.me/writing/a-modern-web-app-in-c",
+        "time": "2026-10-12T16:13:10.000Z"
+      },
+      "collectedAt": "2026-10-13T01:47:16.844Z",
+      "checksum": "50058528"
+    },
+    {
+      "id": "rec-1791856036844-juzd1",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50063365,
+        "title": "Intel D270 GPU AI Accelerator–Up to 480 GB LPDDR5X",
+        "by": "hurricanepootis",
+        "score": 66,
+        "comments": 20,
+        "url": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/data-center-gpu/d-series.html",
+        "time": "2026-10-12T21:35:35.000Z"
+      },
+      "collectedAt": "2026-10-13T01:47:16.844Z",
+      "checksum": "50063365"
+    },
+    {
+      "id": "rec-1791856036844-p6m7o",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50041866,
+        "title": "The baffling intelligence of a single cell (2024)",
+        "by": "jsomers",
+        "score": 35,
+        "comments": 1,
+        "url": "https://jsomers.net/e-coli-chemotaxis/",
+        "time": "2026-10-11T11:02:30.000Z"
+      },
+      "collectedAt": "2026-10-13T01:47:16.844Z",
+      "checksum": "50041866"
+    },
+    {
+      "id": "rec-1791856036844-ovtnr",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50055304,
+        "title": "Hackers activate automatic defrosting in supermarket fridges across Europe",
+        "by": "Zeekaas",
+        "score": 445,
+        "comments": 655,
+        "url": "https://www.tomshardware.com/tech-industry/cyber-security/unprecedented-cyberattack-cripples-supermarket-fridges-across-europe-as-hackers-activate-automatic-defrosting-delivery-and-store-prices-also-impacted-by-incident",
+        "time": "2026-10-12T12:16:42.000Z"
+      },
+      "collectedAt": "2026-10-13T01:47:16.844Z",
+      "checksum": "50055304"
+    },
+    {
+      "id": "rec-1791855736169-giy41",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BITCOIN",
+        "usd_price": 82244,
+        "change_24h_pct": -1.72,
+        "market_cap_usd": 1652190450280.105,
+        "updated_at": "2026-10-13T01:42:16.169Z"
+      },
+      "collectedAt": "2026-10-13T01:42:16.169Z",
+      "checksum": "bitcoin-82244"
+    },
+    {
+      "id": "rec-1791855736169-8b6aj",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "ETHEREUM",
+        "usd_price": 2455.49,
+        "change_24h_pct": -3.3,
+        "market_cap_usd": 299841225976.9365,
+        "updated_at": "2026-10-13T01:42:16.169Z"
+      },
+      "collectedAt": "2026-10-13T01:42:16.169Z",
+      "checksum": "ethereum-2455.49"
+    },
+    {
+      "id": "rec-1791855736169-6rc6s",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "SOLANA",
+        "usd_price": 104.9,
+        "change_24h_pct": -5.83,
+        "market_cap_usd": 61779630574.08524,
+        "updated_at": "2026-10-13T01:42:16.169Z"
+      },
+      "collectedAt": "2026-10-13T01:42:16.169Z",
+      "checksum": "solana-104.9"
+    },
+    {
+      "id": "rec-1791855736169-mb9nv",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BINANCECOIN",
+        "usd_price": 734.32,
+        "change_24h_pct": -2.3,
+        "market_cap_usd": 97750577797.85103,
+        "updated_at": "2026-10-13T01:42:16.169Z"
+      },
+      "collectedAt": "2026-10-13T01:42:16.169Z",
+      "checksum": "binancecoin-734.32"
+    },
+    {
+      "id": "rec-1791855736169-w5iuu",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "RIPPLE",
+        "usd_price": 1.35,
+        "change_24h_pct": -4.03,
+        "market_cap_usd": 85074347215.62184,
+        "updated_at": "2026-10-13T01:42:16.169Z"
+      },
+      "collectedAt": "2026-10-13T01:42:16.169Z",
+      "checksum": "ripple-1.35"
+    },
+    {
+      "id": "rec-1791855406175-d7vwl",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BITCOIN",
+        "usd_price": 82088,
+        "change_24h_pct": -1.89,
+        "market_cap_usd": 1649518945963.0327,
+        "updated_at": "2026-10-13T01:36:46.175Z"
+      },
+      "collectedAt": "2026-10-13T01:36:46.175Z",
+      "checksum": "bitcoin-82088"
+    },
+    {
+      "id": "rec-1791855406175-pz33s",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "ETHEREUM",
+        "usd_price": 2454.45,
+        "change_24h_pct": -3.31,
+        "market_cap_usd": 299756130884.9917,
+        "updated_at": "2026-10-13T01:36:46.175Z"
+      },
+      "collectedAt": "2026-10-13T01:36:46.175Z",
+      "checksum": "ethereum-2454.45"
+    },
+    {
+      "id": "rec-1791855406175-xwjrj",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "SOLANA",
+        "usd_price": 104.64,
+        "change_24h_pct": -6.12,
+        "market_cap_usd": 61635230363.415794,
+        "updated_at": "2026-10-13T01:36:46.175Z"
+      },
+      "collectedAt": "2026-10-13T01:36:46.175Z",
+      "checksum": "solana-104.64"
+    },
+    {
+      "id": "rec-1791855406175-xjamv",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BINANCECOIN",
+        "usd_price": 733.66,
+        "change_24h_pct": -2.43,
+        "market_cap_usd": 97692799730.68597,
+        "updated_at": "2026-10-13T01:36:46.175Z"
+      },
+      "collectedAt": "2026-10-13T01:36:46.175Z",
+      "checksum": "binancecoin-733.66"
+    },
+    {
+      "id": "rec-1791855406175-szzgz",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "RIPPLE",
+        "usd_price": 1.35,
+        "change_24h_pct": -4.21,
+        "market_cap_usd": 84993722830.57912,
+        "updated_at": "2026-10-13T01:36:46.175Z"
+      },
+      "collectedAt": "2026-10-13T01:36:46.175Z",
+      "checksum": "ripple-1.35"
+    },
+    {
+      "id": "rec-1791855113464-luijd",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "AI minister warns 'likely' UK's cyber defences will be breached",
+        "link": "https://www.bbc.co.uk/news/articles/cr78pe09y05xo?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Mon, 12 Oct 2026 15:03:42 GMT",
+        "description": "Kanishka Narayan said the government will use advanced AI to strengthen the UK against cyber attacks."
+      },
+      "collectedAt": "2026-10-13T01:31:53.464Z",
+      "checksum": "AI minister warns 'likely' UK's cyber defences will be breached-https://www.bbc.co.uk/news/articles/cr78pe09y05xo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113465-kxscd",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "AI is less regulated than milk, says Microsoft president",
+        "link": "https://www.bbc.co.uk/news/articles/c6rmy7zmvx3lo?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Mon, 12 Oct 2026 07:47:37 GMT",
+        "description": "Brad Smith calls for global rules on AI, and says the UK is in the \"best position\" to lead the charge."
+      },
+      "collectedAt": "2026-10-13T01:31:53.465Z",
+      "checksum": "AI is less regulated than milk, says Microsoft president-https://www.bbc.co.uk/news/articles/c6rmy7zmvx3lo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113465-fxjxa",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "King warns malicious online actors are evolving tactics",
+        "link": "https://www.bbc.co.uk/news/articles/cme3xl7d18z2o?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Sat, 10 Oct 2026 15:56:32 GMT",
+        "description": "The King spoke of \"threats to our international order\" in a letter marking the 10th anniversary of the National Cyber Security Centre."
+      },
+      "collectedAt": "2026-10-13T01:31:53.465Z",
+      "checksum": "King warns malicious online actors are evolving tactics-https://www.bbc.co.uk/news/articles/cme3xl7d18z2o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113466-lf3p1",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Rogue Anthropic AI agent gave police fake tip in unsolved murder case",
+        "link": "https://www.bbc.co.uk/news/articles/cqkg50j1yd5lo?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Sat, 10 Oct 2026 10:06:23 GMT",
+        "description": "Philadelphia police said the tip was \"flagged as spam\", but criticised the tech company for taking more than two months to detect and report the breach."
+      },
+      "collectedAt": "2026-10-13T01:31:53.466Z",
+      "checksum": "Rogue Anthropic AI agent gave police fake tip in unsolved murder case-https://www.bbc.co.uk/news/articles/cqkg50j1yd5lo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113466-tvpam",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "How drones are hunting fires hidden beneath the Cairngorms",
+        "link": "https://www.bbc.co.uk/news/articles/cwm24n9v8rdeo?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Sat, 10 Oct 2026 09:31:14 GMT",
+        "description": "Dramatic flames from the huge Cairngorms wildfire in July have disappeared - but hot spots can continue to burn beneath the earth."
+      },
+      "collectedAt": "2026-10-13T01:31:53.466Z",
+      "checksum": "How drones are hunting fires hidden beneath the Cairngorms-https://www.bbc.co.uk/news/articles/cwm24n9v8rdeo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113467-k8vvd",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Prize-winning image which sparked backlash was AI-generated, Nikon rules",
+        "link": "https://www.bbc.co.uk/news/articles/cr86z33pdy9vo?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Fri, 09 Oct 2026 15:32:30 GMT",
+        "description": "The camera-maker says it is now re-evaluating the rules and procedures of its Small World in Motion contest."
+      },
+      "collectedAt": "2026-10-13T01:31:53.467Z",
+      "checksum": "Prize-winning image which sparked backlash was AI-generated, Nikon rules-https://www.bbc.co.uk/news/articles/cr86z33pdy9vo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113467-5dtq7",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Anthropic bans users from being 'cruel' to its AI systems",
+        "link": "https://www.bbc.co.uk/news/articles/c6j9k1l72wkgo?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Fri, 09 Oct 2026 12:34:27 GMT",
+        "description": "The firm said users can no longer engage in \"sustained and needless\" abusive behaviour towards the tech."
+      },
+      "collectedAt": "2026-10-13T01:31:53.467Z",
+      "checksum": "Anthropic bans users from being 'cruel' to its AI systems-https://www.bbc.co.uk/news/articles/c6j9k1l72wkgo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113467-u5vhj",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Fired OpenAI researchers say they were let go for 'prioritising safety'",
+        "link": "https://www.bbc.co.uk/news/articles/cvlydn8d3lkjo?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Fri, 09 Oct 2026 09:30:49 GMT",
+        "description": "The AI firm instead claims the researchers were fired for mishandling sensitive information."
+      },
+      "collectedAt": "2026-10-13T01:31:53.467Z",
+      "checksum": "Fired OpenAI researchers say they were let go for 'prioritising safety'-https://www.bbc.co.uk/news/articles/cvlydn8d3lkjo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113468-3a1uq",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Nvidia-backed data centre firm scraps IPO as AI valuation concerns deepen",
+        "link": "https://www.bbc.co.uk/news/articles/ck9dzpw4ll8po?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Fri, 09 Oct 2026 07:14:30 GMT",
+        "description": "Firmus said it had made the decision due to \"recent market volatility and prevailing market conditions\"."
+      },
+      "collectedAt": "2026-10-13T01:31:53.468Z",
+      "checksum": "Nvidia-backed data centre firm scraps IPO as AI valuation concerns deepen-https://www.bbc.co.uk/news/articles/ck9dzpw4ll8po?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113470-zqeq8",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "'Careless use of AI is the real threat - not the ghost stories'",
+        "link": "https://www.bbc.co.uk/news/articles/cjzxz9yp1kq9o?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Fri, 09 Oct 2026 07:05:01 GMT",
+        "description": "Meredith Whittaker says the tech has been misunderstood, in an exclusive interview with BBC Global Women."
+      },
+      "collectedAt": "2026-10-13T01:31:53.470Z",
+      "checksum": "'Careless use of AI is the real threat - not the ghost stories'-https://www.bbc.co.uk/news/articles/cjzxz9yp1kq9o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113472-1wr62",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Why are more roofs not made of solar tiles?",
+        "link": "https://www.bbc.co.uk/news/articles/cdr7n610rmzo?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Thu, 08 Oct 2026 23:09:56 GMT",
+        "description": "Solar tiles were touted as an attractive alternative to solar panels - why have they not taken off?"
+      },
+      "collectedAt": "2026-10-13T01:31:53.472Z",
+      "checksum": "Why are more roofs not made of solar tiles?-https://www.bbc.co.uk/news/articles/cdr7n610rmzo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113472-9kfg0",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "White House blocks Microsoft from foreign worker hiring programme",
+        "link": "https://www.bbc.co.uk/news/articles/ck5yngl2y4gpo?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Thu, 08 Oct 2026 21:37:35 GMT",
+        "description": "An international visa programme has for years allowed US tech companies to hire highly skilled workers from abroad."
+      },
+      "collectedAt": "2026-10-13T01:31:53.472Z",
+      "checksum": "White House blocks Microsoft from foreign worker hiring programme-https://www.bbc.co.uk/news/articles/ck5yngl2y4gpo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113472-gdutu",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Asos hackers took more personal details than first revealed, BBC finds",
+        "link": "https://www.bbc.co.uk/news/articles/c3zxjdw5ywgpo?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Thu, 08 Oct 2026 16:29:33 GMT",
+        "description": "Retailer issues update after BBC contacted by cyber criminals who said this week's breach went beyond \"basic contact details\""
+      },
+      "collectedAt": "2026-10-13T01:31:53.472Z",
+      "checksum": "Asos hackers took more personal details than first revealed, BBC finds-https://www.bbc.co.uk/news/articles/c3zxjdw5ywgpo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113472-fzmnv",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Tech Life",
+        "link": "https://www.bbc.co.uk/sounds/play/w3ct8jyj?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Tue, 06 Oct 2026 19:30:00 GMT",
+        "description": "What is a supercomputer for? How does it work? And who gets to use it? We explain all"
+      },
+      "collectedAt": "2026-10-13T01:31:53.472Z",
+      "checksum": "Tech Life-https://www.bbc.co.uk/sounds/play/w3ct8jyj?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113473-658tm",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Tech Life",
+        "link": "https://www.bbc.co.uk/sounds/play/w3ct8jyh?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Tue, 29 Sep 2026 19:30:00 GMT",
+        "description": "How a Chinese AI model was persuaded to ignore its rules and give dangerous advice."
+      },
+      "collectedAt": "2026-10-13T01:31:53.473Z",
+      "checksum": "Tech Life-https://www.bbc.co.uk/sounds/play/w3ct8jyh?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113473-x4ny3",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Tech Life",
+        "link": "https://www.bbc.co.uk/sounds/play/w3ct8jyg?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Tue, 22 Sep 2026 20:00:00 GMT",
+        "description": "China is competing with the United States and other nations to develop AI."
+      },
+      "collectedAt": "2026-10-13T01:31:53.473Z",
+      "checksum": "Tech Life-https://www.bbc.co.uk/sounds/play/w3ct8jyg?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113473-zr6zd",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Tech Life",
+        "link": "https://www.bbc.co.uk/sounds/play/w3ct8jyf?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Tue, 15 Sep 2026 19:30:00 GMT",
+        "description": "What should children learn in a world transformed by artificial intelligence?"
+      },
+      "collectedAt": "2026-10-13T01:31:53.473Z",
+      "checksum": "Tech Life-https://www.bbc.co.uk/sounds/play/w3ct8jyf?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113473-gkfdh",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Tech Now",
+        "link": "https://www.bbc.co.uk/iplayer/episode/m0032yng?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Sat, 10 Oct 2026 01:00:00 GMT",
+        "description": "Shiona McCallum visits Cairngorms National Park to see tech monitor wildfire damage."
+      },
+      "collectedAt": "2026-10-13T01:31:53.473Z",
+      "checksum": "Tech Now-https://www.bbc.co.uk/iplayer/episode/m0032yng?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113473-3vnt9",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Tech Now",
+        "link": "https://www.bbc.co.uk/iplayer/episode/m0032n6v?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Sat, 03 Oct 2026 01:00:00 GMT",
+        "description": "Alasdair Keane heads to the Pokémon World Championships in San Francisco."
+      },
+      "collectedAt": "2026-10-13T01:31:53.473Z",
+      "checksum": "Tech Now-https://www.bbc.co.uk/iplayer/episode/m0032n6v?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113474-5i3sm",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Tech Now",
+        "link": "https://www.bbc.co.uk/iplayer/episode/m0032d9k?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Sat, 26 Sep 2026 01:00:13 GMT",
+        "description": "Ammie Sekhon explores tech used to identify and remove counterfeit products online."
+      },
+      "collectedAt": "2026-10-13T01:31:53.474Z",
+      "checksum": "Tech Now-https://www.bbc.co.uk/iplayer/episode/m0032d9k?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855113474-osynd",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "sourceUrl": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "data": {
+        "title": "Tech Now",
+        "link": "https://www.bbc.co.uk/iplayer/episode/m0032301?at_medium=RSS&at_campaign=rss",
+        "pubDate": "Sat, 19 Sep 2026 01:00:00 GMT",
+        "description": "Adrienne Murray follows NASA scientists in Iceland researching a rare total solar eclipse."
+      },
+      "collectedAt": "2026-10-13T01:31:53.474Z",
+      "checksum": "Tech Now-https://www.bbc.co.uk/iplayer/episode/m0032301?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "id": "rec-1791855112810-qbfcm",
+      "pipelineId": "pipe-weather-api",
+      "pipelineName": "Open-Meteo Global Weather (Meteorology Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.open-meteo.com/v1/forecast?latitude=21.0285&longitude=105.8542&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,wind_speed_10m",
+      "data": {
+        "time": "2026-10-13T01:30",
+        "temperature_c": 27.5,
+        "humidity_pct": 77,
+        "wind_speed": 4.4
+      },
+      "collectedAt": "2026-10-13T01:31:52.810Z",
+      "checksum": "{\"time\":\"2026-10-13T01:30\",\"temperature_c\":27.5,\"humidity_pct\":77,\"wind_speed\":4.4}"
+    },
+    {
+      "id": "rec-1791855109783-7qp2e",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50064536,
+        "title": "Blood cells from 80-year-old donor become stem cells with molecular age under 20",
+        "by": "arunc",
+        "score": 80,
+        "comments": 38,
+        "url": "https://doi.org/10.1111/acel.70751",
+        "time": "2026-10-12T23:34:22.000Z"
+      },
+      "collectedAt": "2026-10-13T01:31:49.783Z",
+      "checksum": "50064536"
+    },
+    {
+      "id": "rec-1791855109783-v3jws",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50064318,
+        "title": "GPT-6 Astra Helped Me Jailbreak My Kindle",
+        "by": "nirajrajgor",
+        "score": 89,
+        "comments": 48,
+        "url": "https://nirajrajgor.com/blog/kindle-photo-frame-with-ai",
+        "time": "2026-10-12T23:07:25.000Z"
+      },
+      "collectedAt": "2026-10-13T01:31:49.783Z",
+      "checksum": "50064318"
+    },
+    {
+      "id": "rec-1791855109783-c9bf8",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50058507,
+        "title": "GLM-Legal",
+        "by": "ilreb",
+        "score": 423,
+        "comments": 247,
+        "url": "https://z.ai/blog/glm-legal",
+        "time": "2026-10-12T16:11:45.000Z"
+      },
+      "collectedAt": "2026-10-13T01:31:49.783Z",
+      "checksum": "50058507"
+    },
+    {
+      "id": "rec-1791855109783-q90c6",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50063138,
+        "title": "Who Is Vfmaddrnd231pd?",
+        "by": "pngmangi",
+        "score": 109,
+        "comments": 9,
+        "url": "https://purplesyringa.moe/blog/who-is-vfmaddrnd231pd/",
+        "time": "2026-10-12T21:12:43.000Z"
+      },
+      "collectedAt": "2026-10-13T01:31:49.783Z",
+      "checksum": "50063138"
+    },
+    {
+      "id": "rec-1791855109783-kr73w",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50058528,
+        "title": "A Modern Web App in C",
+        "by": "prophittcorey",
+        "score": 389,
+        "comments": 160,
+        "url": "https://prophitt.me/writing/a-modern-web-app-in-c",
+        "time": "2026-10-12T16:13:10.000Z"
+      },
+      "collectedAt": "2026-10-13T01:31:49.783Z",
+      "checksum": "50058528"
+    },
+    {
+      "id": "rec-1791855109783-g3qna",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50041866,
+        "title": "The baffling intelligence of a single cell (2024)",
+        "by": "jsomers",
+        "score": 30,
+        "comments": 1,
+        "url": "https://jsomers.net/e-coli-chemotaxis/",
+        "time": "2026-10-11T11:02:30.000Z"
+      },
+      "collectedAt": "2026-10-13T01:31:49.783Z",
+      "checksum": "50041866"
+    },
+    {
+      "id": "rec-1791855109783-kh21n",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50063365,
+        "title": "Intel D270 GPU AI Accelerator–Up to 480 GB LPDDR5X",
+        "by": "hurricanepootis",
+        "score": 54,
+        "comments": 20,
+        "url": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/data-center-gpu/d-series.html",
+        "time": "2026-10-12T21:35:35.000Z"
+      },
+      "collectedAt": "2026-10-13T01:31:49.783Z",
+      "checksum": "50063365"
+    },
+    {
+      "id": "rec-1791855109783-l8exu",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+      "data": {
+        "storyId": 50055304,
+        "title": "Hackers activate automatic defrosting in supermarket fridges across Europe",
+        "by": "Zeekaas",
+        "score": 436,
+        "comments": 648,
+        "url": "https://www.tomshardware.com/tech-industry/cyber-security/unprecedented-cyberattack-cripples-supermarket-fridges-across-europe-as-hackers-activate-automatic-defrosting-delivery-and-store-prices-also-impacted-by-incident",
+        "time": "2026-10-12T12:16:42.000Z"
+      },
+      "collectedAt": "2026-10-13T01:31:49.783Z",
+      "checksum": "50055304"
+    },
+    {
+      "id": "rec-1791855097527-niq08",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BITCOIN",
+        "usd_price": 82013,
+        "change_24h_pct": -1.99,
+        "market_cap_usd": 1647361587888.406,
+        "updated_at": "2026-10-13T01:31:37.527Z"
+      },
+      "collectedAt": "2026-10-13T01:31:37.527Z",
+      "checksum": "bitcoin-82013"
+    },
+    {
+      "id": "rec-1791855097527-r50rq",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "ETHEREUM",
+        "usd_price": 2450.54,
+        "change_24h_pct": -3.44,
+        "market_cap_usd": 298714142134.2937,
+        "updated_at": "2026-10-13T01:31:37.527Z"
+      },
+      "collectedAt": "2026-10-13T01:31:37.527Z",
+      "checksum": "ethereum-2450.54"
+    },
+    {
+      "id": "rec-1791855097527-wgpb0",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "SOLANA",
+        "usd_price": 104.35,
+        "change_24h_pct": -6.26,
+        "market_cap_usd": 61385172552.75822,
+        "updated_at": "2026-10-13T01:31:37.527Z"
+      },
+      "collectedAt": "2026-10-13T01:31:37.527Z",
+      "checksum": "solana-104.35"
+    },
+    {
+      "id": "rec-1791855097527-abbi1",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "BINANCECOIN",
+        "usd_price": 732.69,
+        "change_24h_pct": -2.58,
+        "market_cap_usd": 97545361935.4181,
+        "updated_at": "2026-10-13T01:31:37.527Z"
+      },
+      "collectedAt": "2026-10-13T01:31:37.527Z",
+      "checksum": "binancecoin-732.69"
+    },
+    {
+      "id": "rec-1791855097527-hqb77",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "sourceUrl": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,ripple&vs_currencies=usd&include_24hr_change=true&include_market_cap=true",
+      "data": {
+        "coin": "RIPPLE",
+        "usd_price": 1.34,
+        "change_24h_pct": -4.21,
+        "market_cap_usd": 84865777914.37082,
+        "updated_at": "2026-10-13T01:31:37.527Z"
+      },
+      "collectedAt": "2026-10-13T01:31:37.527Z",
+      "checksum": "ripple-1.34"
+    }
+  ],
+  "logs": [
+    {
+      "id": "log-1791857042779-so0e",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "startedAt": "2026-10-13T02:04:02.521Z",
+      "completedAt": "2026-10-13T02:04:02.779Z",
+      "durationMs": 258,
+      "status": "success",
+      "httpStatus": 200,
+      "itemsExtracted": 5,
+      "payloadSizeKb": 0.47
+    },
+    {
+      "id": "log-1791856953297-vafo",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "startedAt": "2026-10-13T02:02:32.519Z",
+      "completedAt": "2026-10-13T02:02:33.297Z",
+      "durationMs": 778,
+      "status": "success",
+      "httpStatus": 200,
+      "itemsExtracted": 8,
+      "payloadSizeKb": 4.89
+    },
+    {
+      "id": "log-1791856726349-nd92",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "startedAt": "2026-10-13T01:58:46.080Z",
+      "completedAt": "2026-10-13T01:58:46.349Z",
+      "durationMs": 269,
+      "status": "success",
+      "httpStatus": 200,
+      "itemsExtracted": 5,
+      "payloadSizeKb": 0.47
+    },
+    {
+      "id": "log-1791856396304-ze47",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "startedAt": "2026-10-13T01:53:16.071Z",
+      "completedAt": "2026-10-13T01:53:16.304Z",
+      "durationMs": 233,
+      "status": "success",
+      "httpStatus": 200,
+      "itemsExtracted": 5,
+      "payloadSizeKb": 0.47
+    },
+    {
+      "id": "log-1791856066286-ys7u",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "startedAt": "2026-10-13T01:47:46.059Z",
+      "completedAt": "2026-10-13T01:47:46.286Z",
+      "durationMs": 227,
+      "status": "success",
+      "httpStatus": 200,
+      "itemsExtracted": 5,
+      "payloadSizeKb": 0.47
+    },
+    {
+      "id": "log-1791856036844-gbb9",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "startedAt": "2026-10-13T01:47:16.061Z",
+      "completedAt": "2026-10-13T01:47:16.844Z",
+      "durationMs": 783,
+      "status": "success",
+      "httpStatus": 200,
+      "itemsExtracted": 8,
+      "payloadSizeKb": 4.89
+    },
+    {
+      "id": "log-1791855736169-y0ym",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "startedAt": "2026-10-13T01:42:15.906Z",
+      "completedAt": "2026-10-13T01:42:16.169Z",
+      "durationMs": 263,
+      "status": "success",
+      "httpStatus": 200,
+      "itemsExtracted": 5,
+      "payloadSizeKb": 0.47
+    },
+    {
+      "id": "log-1791855406175-calp",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "startedAt": "2026-10-13T01:36:45.900Z",
+      "completedAt": "2026-10-13T01:36:46.175Z",
+      "durationMs": 275,
+      "status": "success",
+      "httpStatus": 200,
+      "itemsExtracted": 5,
+      "payloadSizeKb": 0.47
+    },
+    {
+      "id": "log-1791855113474-u47m",
+      "pipelineId": "pipe-rss-tech",
+      "pipelineName": "BBC Tech & Global Feed (RSS News Harvester)",
+      "pipelineType": "rss_feed",
+      "startedAt": "2026-10-13T01:31:52.810Z",
+      "completedAt": "2026-10-13T01:31:53.474Z",
+      "durationMs": 664,
+      "status": "success",
+      "httpStatus": 200,
+      "itemsExtracted": 21,
+      "payloadSizeKb": 15.01
+    },
+    {
+      "id": "log-1791855112810-mm65",
+      "pipelineId": "pipe-weather-api",
+      "pipelineName": "Open-Meteo Global Weather (Meteorology Web App)",
+      "pipelineType": "rest_api",
+      "startedAt": "2026-10-13T01:31:51.674Z",
+      "completedAt": "2026-10-13T01:31:52.810Z",
+      "durationMs": 1136,
+      "status": "success",
+      "httpStatus": 200,
+      "itemsExtracted": 1,
+      "payloadSizeKb": 0.51
+    },
+    {
+      "id": "log-1791855109783-w8xp",
+      "pipelineId": "pipe-hn-api",
+      "pipelineName": "HackerNews Top Stories (Tech Web App)",
+      "pipelineType": "rest_api",
+      "startedAt": "2026-10-13T01:31:49.026Z",
+      "completedAt": "2026-10-13T01:31:49.783Z",
+      "durationMs": 757,
+      "status": "success",
+      "httpStatus": 200,
+      "itemsExtracted": 8,
+      "payloadSizeKb": 4.89
+    },
+    {
+      "id": "log-1791855097527-ffit",
+      "pipelineId": "pipe-crypto-rates",
+      "pipelineName": "CoinGecko Crypto Market Rates (Finance App)",
+      "pipelineType": "rest_api",
+      "startedAt": "2026-10-13T01:31:37.246Z",
+      "completedAt": "2026-10-13T01:31:37.527Z",
+      "durationMs": 281,
+      "status": "success",
+      "httpStatus": 200,
+      "itemsExtracted": 5,
+      "payloadSizeKb": 0.47
+    }
+  ]
+}
